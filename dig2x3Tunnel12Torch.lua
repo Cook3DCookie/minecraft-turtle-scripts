@@ -5,7 +5,7 @@ local torchInterval = 12
 function tryDig()
     while turtle.detect() do
         if not turtle.dig() then
-            sleep(0.5)
+            sleep(1)
         else
             break
         end
@@ -15,7 +15,7 @@ end
 function tryDigUp()
     while turtle.detectUp() do
         if not turtle.digUp() then
-            sleep(0.5)
+            sleep(1)
         else
             break
         end
@@ -83,16 +83,15 @@ while true do
     
     -- Step 11: Turn left and move down
     turtle.turnLeft()
-    --[[while not turtle.down() do
-        sleep(0.5)
-    end]]
-    
+    while not turtle.down() do
+        sleep(1)
+    end
     turtle.down()
     
     -- Step 12: Move forward
     while not turtle.forward() do
         tryDig()
-        sleep(0.5)
+        sleep(1)
     end
     turtle.forward()
     
