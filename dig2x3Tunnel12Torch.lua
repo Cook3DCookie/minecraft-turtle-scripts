@@ -23,9 +23,8 @@ function tryDigUp()
 end
 
 function placeTorchIfNeeded()
-    turtle.turnRight()
     if distance % torchInterval ~= 0 then return end
-    
+    turtle.turnRight()
     for s=1,16 do
         turtle.select(s)
         local data = turtle.getItemDetail()
