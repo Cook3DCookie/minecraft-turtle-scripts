@@ -2,7 +2,7 @@
 local distance = 0
 local torchInterval = 12
 
---[[function tryDig()
+function tryDig()
     while turtle.detect() do
         if not turtle.dig() then
             sleep(0.5)
@@ -20,9 +20,10 @@ function tryDigUp()
             break
         end
     end
-end]]
+end
 
 function placeTorchIfNeeded()
+    turtle.turnRight()
     if distance % torchInterval ~= 0 then return end
     
     for s=1,16 do
@@ -35,50 +36,51 @@ function placeTorchIfNeeded()
             break
         end
     end
+    turtle.turnLeft()
 end
 
 while true do
     -- Step 1: Dig forward
-    turtle.dig()
+    tryDig()
     
     -- Step 2: Turn left and dig
     turtle.turnLeft()
-    turtle.dig()
+    tryDig()
     
     -- Step 3: Turn right (face forward)
     turtle.turnRight()
     
     -- Step 4: Turn right and dig
     turtle.turnRight()
-    turtle.dig()
+    tryDig()
     
     -- Step 5: Turn right and maybe place torch
-    turtle.turnRight()
+    --turtle.turnRight()
     placeTorchIfNeeded()
     
     -- Step 6: Turn left twice
-    turtle.turnLeft()
+    --turtle.turnLeft()
     turtle.turnLeft()
     
     -- Step 7: Dig above
-    turtle.digUp()
+    tryDigUp()
     
     -- Step 8: Move up
-    --[[while not turtle.up() do
+    while not turtle.up() do
         tryDigUp()
         sleep(0.5)
-    end]]
+    end
     
     turtle.up()
     
     -- Step 9: Turn left and dig
     turtle.turnLeft()
-    turtle.dig()
+    tryDig()
     
     -- Step 10: Turn right twice and dig
     turtle.turnRight()
     turtle.turnRight()
-    turtle.dig()
+    tryDig()
     
     -- Step 11: Turn left and move down
     turtle.turnLeft()
@@ -89,10 +91,10 @@ while true do
     turtle.down()
     
     -- Step 12: Move forward
-    --[[while not turtle.forward() do
+    while not turtle.forward() do
         tryDig()
         sleep(0.5)
-    end]]
+    end
     turtle.forward()
     
     distance = distance + 1
